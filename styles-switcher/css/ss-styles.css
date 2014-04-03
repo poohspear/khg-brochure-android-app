@@ -1,0 +1,229 @@
+/*
+* Created by MassivePixelCreation
+*
+* Version 1.0
+*
+* This is a CSS file for styles-switcher.
+*
+*/
+
+/*-----------------------------------------------------------------------------------*/
+/*	Main Styles
+/*-----------------------------------------------------------------------------------*/
+
+#mpc-styles-switcher {
+	position: absolute;
+	width: 290px;
+	z-index: 19999;
+	overflow: hidden;
+	padding-bottom: 10px;
+	top: 20px;
+}
+
+#ss-content {
+	background: #F2F2F2;
+	width: 240px;
+	display: block;
+	position: relative;
+	z-index: 5;
+	float: left;
+	
+	-webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-moz-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-ms-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-o-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	-ms-border-bottom-right-radius: 5px;
+	-o-border-bottom-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#ss-bookmark {
+	background: transparent url('../images/bookmark.png') no-repeat;
+	position: relative;
+	z-index: 2;
+	width: 46px;
+	height: 147px;
+	float:right;
+	margin-top: -2px;
+	left: -4px;
+	cursor: pointer;
+	
+	/*-webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-moz-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-ms-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	-o-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.01) inset;*/
+}
+
+#ss-bookmark-icon {
+	background: transparent url('../images/bookmark-icon.png') no-repeat;
+	position: absolute;
+	z-index: 3;
+	width: 17px;
+	height: 17px;
+	top: 105px;
+	left: 5px;
+	cursor: pointer;
+}
+
+#ss-bookmark:hover > #ss-bookmark-icon {
+	-webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    -ms-transition: all 1s ease-out;
+	transform: rotate(180deg); 
+	-webkit-transform: rotate(180deg); 
+	-moz-transform: rotate(180deg); 
+	-o-transform: rotate(180deg); 
+	cursor: pointer;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	SS Interface & Modules
+/*-----------------------------------------------------------------------------------*/
+
+/* Global for each option */
+
+.ss-option {
+	font-family: 'Helvetica', 'Arial', 'Sans-serif';
+	font-size: 11px;
+	color: #757575;
+	position: relative;
+	display: block;
+	text-align: center;
+	margin: 0px 5px 0px 5px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	width: 182px;
+	left: 25px;
+	float: left;
+	border-bottom: 1px solid #DDDDDD;
+	border-top: 1px solid #FFFFFF;
+	clear: both;
+}
+
+.ss-option.first {
+	border-top: 0px;
+	padding-top: 10px;
+}
+
+.ss-option.last {
+	border-bottom: 0px;
+	padding-bottom: 30px;
+}
+
+.ss-desc {
+	text-align: left;
+	margin-bottom: 5px;
+	line-height: 1.5em;
+	width: 180px;
+}
+
+.ss-desc-last {
+	margin-bottom: -15px;
+	margin-top: 275px;
+	text-align: center;
+	line-height: 1.5em;
+	width: 180px;
+}
+
+/* logo */
+.ss-logo {
+	margin-top: 15px;
+	margin-left: -2px;
+}
+
+.ss-option.logo {
+	border: 0px;
+	padding-bottom: 0px;
+}
+
+/* drop down */
+.ss-dropdown {
+	width: 180px;
+}
+
+.customStyleSelectBox {
+	width: 180px;
+	background: #FFFFFF;
+	text-align: left;
+	text-indent: 8px;
+	line-height: 30px;
+	height: 30px;
+	border: 1px solid #D8D8D8;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.customStyleSelectBoxInner {
+	background: url('../images/dropdown.png') no-repeat 142px -1px;
+}
+
+/* picker */
+.ss-colorSelector {
+	height: 1px;
+	width: 1px;
+}
+
+.ss-color {
+	color: #757575;
+	font-size: 11px;
+	background: #FFFFFF url('../images/picker.png') no-repeat 150px -1px;
+	border: 1px solid #D7D7D7;
+	border-radius: 5px;
+	height: 30px;
+	line-height: 10px;
+	text-indent: 8px;
+	width: 180px;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+.ss-colorSelector div {	
+	z-index: 20;
+    position: relative;
+    top: 5px;
+    left: 4px;
+    width: 143px;
+    height: 24px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    cursor: pointer;
+}
+
+/* choose image */
+.ss-image {
+	float: left;
+	display: block;
+	margin-right: 8px;
+	margin-bottom: 1px;
+	cursor: pointer;
+}
+
+.ss-image.no-margin {
+	margin-right: 0px;
+}
+
+.ss-image img {
+	background: #FFFFFF;
+	padding: 3px;
+	border: 1px solid #D7D7D7;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.ss-image input {
+	display: none;
+}

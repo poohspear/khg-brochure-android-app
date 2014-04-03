@@ -1,0 +1,376 @@
+<!doctype html>
+
+<!-- Przy stronach div nie ustawiac overflow: hidden tekst wtedy miga przy najechaniu na rog -->
+<html>
+<head>
+	<title>Responsive Flip Book powered by jQuery - Brochure</title>
+	<!-- Meta -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="keywords" content="flip book, book, page, flip, effect, jquery, html5, magazine, pageflip, flipbook, pagefliper, newspaper, ipad, iphone, android, ios, mpc, massivePixelCreation">
+	<meta name="description" content="HTML Flip Book is a jQuery powered magazine components which lets you easily create: books, magazines and newspapers.">
+	
+	<!-- Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/page-styles.css">
+		
+	<style type="text/css">
+		body {
+			background-image: url('images/body_bg.png');
+		}
+	</style>
+	
+	
+	<style type="text/css">
+	
+		#flipbook-1 {
+			margin-top: 20px;
+			margin-bottom: 0px;
+			margin-left: 0px;
+			margin-right: 0px;
+			
+			width: 848px; 
+			height: 600px; 
+		}
+		
+		#flipbook-1 div.fb-page div.page-content {
+			margin: 0px 0px; 
+		}
+		
+		#flipbook-1 .turn-page {
+			width: 424px;		
+			height: 600px;
+			background: #ECECEC;
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+							box-shadow: inset -1px 0px 1px 0px #BFBFBF; 
+			
+		}
+		
+		#flipbook-1 .last .turn-page,
+		#flipbook-1 .even .turn-page {
+			border-radius: 0px;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;	
+							box-shadow: inset 1px 0px 1px 0px #BFBFBF;
+		}
+		
+		#flipbook-1 .fpage .turn-page {
+			border-radius: 0px;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;
+							box-shadow: inset 1px 0px 1px 0px  #BFBFBF;
+		}
+		
+		#flipbook-1 .last .fpage .turn-page,
+		#flipbook-1 .even .fpage .turn-page {
+			border-radius: 0px;
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+							box-shadow: inset -1px 0px 1px 0px #BFBFBF;
+		}
+		
+		#flipbook-container-1 div.page-content div.container img.bg-img {
+			margin-top: 0px;
+			margin-left: 0px;
+		}
+		
+		#flipbook-container-1 div.page-content.first div.container img.bg-img {
+			margin-top: 0px;
+		}
+	
+		#flipbook-container-1 div.page-content.even div.container img.bg-img {
+			left: 0px;
+		}
+		
+		#flipbook-container-1 div.page-content.last div.container img.bg-img {
+			left: 0px;
+			margin-top: 0px;
+		}
+	
+		#flipbook-1 div.page-transition.last div.page-content,
+		#flipbook-1 div.page-transition.even div.page-content,
+		#flipbook-1 div.turn-page-wrapper.odd div.page-content {
+			margin-left: 0px;
+			margin-right: 0px; 
+		}
+	
+		#flipbook-1 div.turn-page-wrapper.first div.page-content {
+			margin-right: 0px;
+			margin-left: 0px; 
+		}
+	
+		#flipbook-1 div.page-transition.first div.page-content,
+		#flipbook-1 div.page-transition.odd div.page-content,
+		#flipbook-1 div.turn-page-wrapper.even div.page-content,
+		#flipbook-1 div.turn-page-wrapper.last div.page-content {
+			margin-left: 0px;
+		}
+		
+		#flipbook-1 div.fb-page-edge-shadow-left,
+		#flipbook-1 div.fb-page-edge-shadow-right,
+		#flipbook-1 div.fb-inside-shadow-left,
+		#flipbook-1 div.fb-inside-shadow-right {
+			top: 0px;
+			height: 600px;
+		}
+		
+		#flipbook-1 div.fb-page-edge-shadow-left {
+			left: 0px;
+		}
+		
+		#flipbook-1 div.fb-page-edge-shadow-right {
+			right: 0px;
+		}
+		
+		/* Zoom */
+					
+		#flipbook-container-1 div.zoomed-shadow {
+			opacity: 1;
+		}
+		
+		#flipbook-container-1 div.zoomed {
+			border: 10px solid #ECECEC;
+			border-radius: 10px;
+							box-shadow: 0px 0px 0px 1px #D0D0D0;	
+				
+		}	
+		
+		/* Show All Pages */
+		#flipbook-container-1 div.show-all div.show-all-thumb {
+			margin-bottom: 12px;
+			height: 180px;
+			width: 125px;
+			border: 1px solid #878787;
+		}
+		
+		#flipbook-container-1 div.show-all div.show-all-thumb.odd {
+			margin-right: 10px;
+			border-left: none;
+		}
+		
+		#flipbook-container-1 div.show-all div.show-all-thumb.odd img.bg-img {
+			padding-left: 250px;
+		}
+		
+		#flipbook-container-1 div.show-all div.show-all-thumb.odd.first img.bg-img {
+			padding-left: 0px;
+		}
+		
+		#flipbook-container-1 div.show-all div.show-all-thumb.even {
+			border-right: none;
+		}
+		
+		#flipbook-container-1 div.show-all div.show-all-thumb.last-thumb {
+			margin-right: 0px;
+		}
+		
+		#flipbook-container-1 div.show-all {
+			background: #F6F6F6;
+			border-radius: 10px;
+							border: 1px solid #D6D6D6;
+		}
+		
+		#flipbook-container-1 div.show-all div.content {
+			top: 10px;
+			left: 10px;
+		}
+	
+		
+		/* Inner Pages Shadows */
+				
+					#flipbook-1 div.fb-page-edge-shadow-left,
+			#flipbook-1 div.fb-page-edge-shadow-right {
+				display: none;
+			}
+				
+	</style>
+	<!-- Scripts -->
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="js/swfobject2.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="js/turn.js"></script>
+	<script type="text/javascript" src="js/flipbook.js"></script>
+	<script type="text/javascript" src="js/jquery.doubletap.js"></script>
+	<script type="text/javascript" src="js/jquery.color.js"></script>
+	
+	
+</head>
+<body>
+
+<div id="flipbook-container-1" class="flipbook-container">
+	
+	<!-- Flip book -->
+	<div id="flipbook-1" class="flipbook">
+		<!-- Start Flip Book Pages -->
+		
+		<!-- Cover -->
+		<div class="fb-page">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/01.png" class="bg-img" />
+					<img src="pages/01.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Pages 2 & 3 -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/02.png" class="bg-img" />
+					<img src="pages/02.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Pages 4 & 5 -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/04.png" class="bg-img" />
+					<img src="pages/04.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/06.png" class="bg-img" />
+					<img src="pages/06.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/08.png" class="bg-img" />
+					<img src="pages/08.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/10.png" class="bg-img" />
+					<img src="pages/10.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/12.png" class="bg-img" />
+					<img src="pages/12.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/14.png" class="bg-img" />
+					<img src="pages/14.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/16.png" class="bg-img" />
+					<img src="pages/16.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/18.png" class="bg-img" />
+					<img src="pages/18.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/20.png" class="bg-img" />
+					<img src="pages/20.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/22.png" class="bg-img" />
+					<img src="pages/22.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/24.png" class="bg-img" />
+					<img src="pages/24.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page double">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/26.png" class="bg-img" />
+					<img src="pages/26.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Back Cover -->
+		<div class="fb-page">
+			<div class="page-content">
+				<div class="container">
+					<img src="pages/28.png" class="bg-img" />
+					<img src="pages/28.png" class="bg-img zoom-large"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- end Flip Book Pages -->
+		
+	</div> <!-- end Flip Book -->
+	
+	<!-- Flip Book Navigation -->
+	<div id="fb-nav-1" class="fb-nav mobile spread">
+		<ul>
+			<!-- <li class="toc round">Table Of Content</li> -->
+			<li class="zoom round">Zoom</li>
+			<li class="slideshow round">Slide Show</li>
+			<li class="show-all round">Show All Pages</li>
+		</ul>
+				
+	</div> <!-- end FLip Book Nav -->
+</div> <!-- end Flip Book Container -->
+
+</body>
+</html>

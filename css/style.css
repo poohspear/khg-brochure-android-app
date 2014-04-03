@@ -1,0 +1,648 @@
+/*-----------------------------------------------------------------------------------*/
+/*	Project Name: Responsive Flip Book powered by jQuery
+/*	Author: MassivePixelCreation
+/*	Author URI: http://www.blog.mpcreation.pl
+/*	Version: 1.0
+/*-----------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------*/
+/*	Main Styles
+/*-----------------------------------------------------------------------------------*/
+
+html {
+	image-rendering: optimizeQuality;
+}
+
+body {
+	background: #FAFAFA;
+	margin: 0px;
+	font-size: 14px;
+}
+
+p {
+	font-size: 14px;
+}
+
+.flipbook-container {
+	position: relative;
+	margin: auto;
+	/*
+overflow-x: hidden;
+	overflow-y: hidden;
+*/
+	width: 100%; 	
+	z-index: 2;
+	height: 100%; /* flip book container height */
+}
+
+.flipbook {
+	position: relative;
+	width: 700px; /* flip book width with border */
+	height: 500px; /* flip book height with border */
+	opacity: 1;
+	z-index: 10;
+	
+}
+
+#flipbook-1 .turn-page {
+	width: 350px; /* single page width with border */
+	height: 500px; /* single page height with border */
+	background-size: 100% 100%;
+	background: black; /* border color */
+}
+
+div.flipbook div.fb-page {
+	width: 100%;
+	height: 100%;
+}
+
+
+div.flipbook div.fb-page div.page-content {
+	width: 345px; /* width of the height of the single page minus the border */
+	height: 490px;
+	margin: 5px 0px; /* Specifies Borderd */
+}
+
+div.flipbook div.turn-page-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+div.flipbook div.turn-page-wrapper > div {
+ 	pointer-events: none; 
+}
+
+div.flipbook div.page-transition.last div.page-content,
+div.flipbook div.page-transition.even div.page-content,
+div.flipbook div.turn-page-wrapper.odd div.page-content {
+	margin-left: 0px;
+	margin-right: 5px; /* Specifies Borderd */
+}
+
+div.flipbook div.turn-page-wrapper.first div.page-content {
+	margin-right: 5px;
+	margin-left: 0px; /* Specifies Borderd */
+}
+
+div.flipbook div.page-transition.first div.page-content,
+div.flipbook div.page-transition.odd div.page-content,
+div.flipbook div.turn-page-wrapper.even div.page-content,
+div.flipbook div.turn-page-wrapper.last div.page-content {
+	margin-left: 5px; /* Specifies Borderd */
+}
+
+div.flipbook img.bg-img.zoom-large {
+	opacity: 0;
+	display: none;
+}
+
+/* dodac size borderu / dodac do settings */
+div.flipbook-container div.page-content img.bg-img {
+	position: absolute; 
+	left: 0px; 
+	top:0px; 
+	margin-top: 10px;
+	max-width: 100%!important;
+}
+
+div.flipbook-container div.page-content.last img.bg-img,
+div.flipbook-container div.page-content.even img.bg-img {
+	left: 10px; 
+}
+
+div.flipbook-container div.double.page-content > div.container,
+div.flipbook-container div.double div.page-content > div.container {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 200%;
+	height: 100%;
+}
+
+div.flipbook-container div.double.page-content.odd > div.container,
+div.flipbook-container div.double div.page-content.odd > div.container {
+	margin-left: -100%;
+}
+
+div.flipbook-container div.double.page-content div.left,
+div.flipbook-container div.double div.page-content div.left {
+	float: left; 
+	width: 50%;
+}
+
+div.flipbook-container div.double.page-content div.right,
+div.flipbook-container div.double div.page-content div.right {
+	float: right; 
+	width: 50%;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Flip Book Shadows
+/*-----------------------------------------------------------------------------------*/
+
+.flipbook div.fb-inside-shadow-right {
+	position: absolute;
+	overflow: hidden;
+	width: 345px;
+	height: 490px;
+	top: 5px;
+	left: 0px;
+	z-index: 10;
+	background: transparent url('../images/inner-shadow-right.png');
+	pointer-events: none;
+	background-size: 100%;
+}
+
+.flipbook div.fb-inside-shadow-left {
+	position: absolute;
+	overflow: hidden;
+	width: 345px;
+	height: 490px;
+	top: 5px;
+	right: 0px;
+	z-index: 10;
+	background: transparent url('../images/inner-shadow-left.png');
+	pointer-events: none;
+	background-size: 100%;
+}
+
+.flipbook div.fb-page-edge-shadow-right {
+	position: absolute;
+	width: 2px;
+	height: 490px;
+	top: 10px;
+	right: 10px;
+	z-index: 20;
+	background: transparent url('../images/edge-page-shadow-right.jpg');
+}
+
+.flipbook div.fb-page-edge-shadow-left {
+	position: absolute;
+	width: 2px;
+	height: 490px;
+	top: 10px;
+	left: 10px;
+	z-index: 11!important;
+	background: transparent url('../images/edge-page-shadow-left.jpg');
+}
+
+/* shadows under flip book */
+
+.flipbook div.fb-shadow-top-right,
+.flipbook div.fb-shadow-top-left,
+.flipbook div.fb-shadow-bottom-right,
+.flipbook div.fb-shadow-bottom-left {
+	background: url('../images/page-curve-shadow.png') no-repeat;
+	background-size: 100% 100%;
+	width: 355px;
+	height: 56px;
+	display: inline-block;
+	position: absolute;
+	opacity: 0;
+	z-index: 0!important;
+}
+
+.flipbook div.fb-shadow-bottom-left {
+	left: 0px;
+	bottom: -14px;
+}
+
+.flipbook div.fb-shadow-bottom-right {
+	right: 0px;
+	bottom: -14px;
+}
+
+.flipbook div.fb-shadow-top-left {
+	left: 0px;
+	top: -12px;
+}
+
+.flipbook div.fb-shadow-top-right {
+	right: 0px;
+	top: -12px;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*	Zoom
+/*-----------------------------------------------------------------------------------*/
+
+.flipbook-container div.zoomed {
+	position: absolute;
+	margin: auto;
+	overflow: hidden;
+	top: 20px;
+	z-index: 30;
+	border: 10px solid #ECECEC;
+	border-radius: 10px;
+	box-shadow: 0 0 0 1px #D0D0D0;
+}
+
+.flipbook-container div.zoomed-shadow {
+	position: absolute;
+	margin: auto;
+	background: url('../images/zoom-overlay.png') no-repeat;
+	background-size: 100% 100%;
+	z-index: 41;
+	pointer-events: none;
+	opacity: 0.2;
+}
+
+.flipbook-container div.zoomed.double.odd {
+	margin-left: 0px!important;
+}
+
+/* Video Player */
+.flipbook-container div.video video,
+.flipbook-container div.video object {
+	position: relative;
+	z-index: 15;
+	display: block;
+	pointer-events: all;
+	margin: 0px auto;
+}
+
+.flipbook-container div.showall-shadow-top,
+.flipbook-container div.showall-shadow-bottom,
+.flipbook-container div.zoomed-shadow-top,
+.flipbook-container div.zoomed-shadow-bottom {
+	position: absolute;
+	z-index: 20;
+	opacity: 0;
+	height: 55px;
+	background-size: 100% 55px!important;
+	background: transparent url('../images/shadow-big.png') no-repeat;
+}
+
+.flipbook-container div.showall-shadow-top,
+.flipbook-container div.showall-shadow-bottom {
+	height: 55px;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Flip Book Navigation
+/*-----------------------------------------------------------------------------------*/
+
+.fb-nav {
+	position: relative;
+	margin: 0px auto 0px auto;
+	
+	top: -100px;
+	opacity: 0;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.fb-nav.stacked {
+	width: 370px;
+}
+
+.fb-nav.spread {
+	width: 400px;
+}
+
+.fb-nav ul {
+	position: relative;
+	overflow: hidden;
+	padding-left: 0px;
+	width: 100%;
+	margin-left: -3px;
+}
+
+.fb-nav.spread ul {
+	margin-left: -6px;
+}
+
+.fb-nav.stacked.small ul {
+	margin-top: 16px;
+}
+
+.fb-nav ul li {
+	position: relative;
+	float: left;
+	list-style: none;
+	margin-right: 0px;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+
+.fb-nav ul li.last {
+	margin-right: 0px;
+}
+
+/* UI regular state */
+
+div.mobile.round span.button,
+div.mobile.round span.button-over,
+.fb-nav ul li span.button-over,
+.fb-nav ul li span.button {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 86px;
+	display: inline-block;
+	z-index: 1;
+	cursor: pointer;
+}
+
+div.mobile.round span.button-icon,
+.fb-nav ul li span.button-icon-over,
+.fb-nav ul li span.button-icon {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 37px;
+	width: 37px;
+	display: inline-block;
+	z-index: 2;
+}
+
+.fb-nav ul li span.button-over { z-index: 0; opacity: 0;}
+
+.fb-nav ul li.left span.button-over,
+.fb-nav ul li.left span.button,
+.fb-nav ul li.left { height: 86px; width: 97px;}
+
+.fb-nav ul li.right span.button-over,
+.fb-nav ul li.right span.button,
+.fb-nav ul li.right { height: 86px; width: 95px;}
+
+.fb-nav ul li.center span.button-over,
+.fb-nav ul li.center span.button,
+.fb-nav ul li.center { height: 86px; width: 89px;}
+
+div.mobile.round span.button-over,
+div.mobile.round span.button,
+.fb-nav ul li.round span.button-over,
+.fb-nav ul li.round span.button,
+.fb-nav ul li.round { height: 86px; width: 86px;}
+
+.fb-nav ul li.left span.button { background: transparent url('http://www.mpcreation.pl/flipbook/html/images/ui/mobile/b-left.png') no-repeat; }
+.fb-nav ul li.right span.button { background: transparent url('http://www.mpcreation.pl/flipbook/html/images/ui/mobile/b-right.png') no-repeat; }
+.fb-nav ul li.center span.button { background: transparent url('http://www.mpcreation.pl/flipbook/html/images/ui/mobile/b-center.png') no-repeat; }
+.fb-nav ul li.round span.button { background: transparent url('http://www.mpcreation.pl/flipbook/html/images/ui/mobile/b-round.png') no-repeat; }
+div.mobile.round span.button { background: transparent url('http://www.mpcreation.pl/flipbook/html/images/ui/mobile/b-round.png') no-repeat; }
+
+.fb-nav ul li.left span.button-over { background: transparent url('../images/ui/mobile/b-left-hover.png') no-repeat; }
+.fb-nav ul li.right span.button-over { background: transparent url('../images/ui/mobile/b-right-hover.png') no-repeat; }
+.fb-nav ul li.center span.button-over { background: transparent url('../images/ui/mobile/b-center-hover.png') no-repeat; }
+.fb-nav ul li.round span.button-over { background: transparent url('../images/ui/mobile/b-round-hover.png') no-repeat; }
+div.mobile.round span.button-over { opacity: 0; background: transparent url('../images/ui/mobile/b-round-hover.png') no-repeat; }
+
+.fb-nav ul li.toc span.button-icon { top: 25px; left: 25px; background: transparent url('../images/ui/mobile/icon-toc.png') no-repeat; }
+.fb-nav ul li.toc.left span.button-icon { left: 31px; }
+.fb-nav ul li.toc.round span.button-icon { left: 24px; }
+
+.fb-nav ul li.zoom span.button-icon { top: 24px; left: 23px; background: transparent url('../images/ui/mobile/icon-zoom.png') no-repeat; }
+
+.fb-nav ul li.zoom.left span.button-icon { left: 29px; }
+.fb-nav ul li.zoom.round span.button-icon { left: 22px; }
+
+.fb-nav ul li.slideshow span.button-icon { top: 25px; left: 25px; background: transparent url('../images/ui/mobile/icon-play.png') no-repeat; }
+
+.fb-nav ul li.slideshow.left span.button-icon,
+.fb-nav ul li.slideshow.left span.button-icon-over { left: 32px; }
+
+.fb-nav ul li.slideshow.round span.button-icon,
+.fb-nav ul li.slideshow.round span.button-icon-over { left: 23px; }
+
+.fb-nav ul li.slideshow span.button-icon-over { top: 25px; left: 25px; opacity: 0; background: transparent url('../images/ui/mobile/icon-pause.png') no-repeat; }
+.fb-nav ul li.show-all span.button-icon { top: 26px; left: 25px; background: transparent url('../images/ui/mobile/icon-pages.png') no-repeat; }
+.fb-nav ul li.show-all.right span.button-icon { left: 27px; }
+.fb-nav ul li.show-all.left span.button-icon { left: 32px; }
+.fb-nav ul li.show-all.round span.button-icon { left: 24px; }
+
+.fb-nav.spread ul li.round {
+	margin-left: 10px;
+}
+
+div.mobile.next.round span.button-icon{ top: 25px; left: 26px; background: transparent url('../images/ui/mobile/icon-next.png') no-repeat; }
+div.mobile.preview.round span.button-icon { top: 25px; left: 22px; background: transparent url('../images/ui/mobile/icon-prev.png') no-repeat; }
+
+div.mobile.round {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 100;
+}
+
+div.mobile.round.next {	
+	left: 500px;
+	top: 212px;
+	opacity: 0;
+	z-index: 1;
+	width: 86px;
+	height: 86px;
+}
+
+div.mobile.round.preview {	
+	left: 500px;
+	top: 212px;
+	opacity: 0;
+	z-index: 1;
+	width: 86px;
+	height: 86px;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/*	Show All Pages Panel
+/*-----------------------------------------------------------------------------------*/
+
+.flipbook-container div.show-all {
+	position: absolute;
+	top: 60px;
+	z-index: 25;
+	left: 100px;
+	overflow: hidden;
+	background: #F6F6F6;
+	border-radius: 10px;
+	border: 1px solid #D6D6D6;
+	opacity: 0;
+}
+
+.flipbook-container div.show-all div.content {
+	position: absolute;
+	overflow: hidden;
+	top: 12px;
+	left: 12px;
+}
+
+.flipbook-container div.show-all div.content > div.show-all-thumb {
+	position: relative;
+	overflow: hidden;
+	margin-right: 10px;
+	margin-bottom: 12px;
+	float: left;
+	height: 180px!important;
+	width: 125px!important;
+	border: 1px solid #878787;
+	cursor: pointer;
+}
+.flipbook-container div.show-all div.content > div.show-all-thumb.last,
+.flipbook-container div.show-all div.content > div.show-all-thumb.even {
+	margin-right: 0px;
+	border-right: none;
+}
+.flipbook-container div.show-all div.content > div.show-all-thumb.first,
+.flipbook-container div.show-all div.content > div.show-all-thumb.odd {
+	border-left: none;
+}
+
+.flipbook-container div.show-all div.content > div.show-all-thumb.last-thumb { margin-right: 0px; }
+
+
+.flipbook-container div.show-all div.content > div.show-all-thumb * {
+	pointer-events: none;
+}
+
+
+/* Thumbnail shadow */
+.flipbook-container div.show-all div.content > div.show-all-thumb span.shadow {
+	display: block;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	pointer-events: none;
+	opacity: 0;
+}
+
+.flipbook-container div.show-all div.content > div.show-all-thumb.even span.shadow { 
+	left: 0px; 
+	background: url('../images/thumb-hover-left.png') no-repeat;	
+}
+
+.flipbook-container div.show-all div.content > div.show-all-thumb.odd span.shadow { 
+	right: 0px; 
+	background: url('../images/thumb-hover-right.png') no-repeat;	
+}
+
+div.show-all-thumb.last img.bg-img,
+div.show-all-thumb.first img.bg-img,
+div.show-all-thumb.odd img.bg-img,
+div.show-all-thumb.even img.bg-img {
+	margin: 0px 0px 0px 0px!important;
+	top: 0px!important;
+	left: 0px!important; 
+	bottom: 0px!important;
+	right: 0px!important;
+}
+
+div.show-all-thumb.double.odd img.bg-img {
+	margin: 0px 0px 0px -100%!important;
+	top: 0px!important;
+	left: 0px!important; 
+	bottom: 0px!important;
+	right: 0px!important;
+}
+
+.flipbook-container div.show-all div.show-all-thumb img.bg-img {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.flipbook-container div.show-all div.show-all-thumb.double img.bg-img {
+	width: 200% !important;
+	height: 100% !important;
+}
+
+
+/* big next button */
+span.big-next {
+	display: block;
+	height: 81px;
+	z-index: 19;
+}
+
+span.big-next span.left {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 12px;
+	height: 81px;
+	background: url('../images/ui/mobile/big-next-left.png') no-repeat;
+	display: inline-block;
+}
+
+span.big-next span.left.hover {
+	opacity: 0;
+	background: url('../images/ui/mobile/big-next-left-hover.png') no-repeat;
+	z-index: 1;
+}
+
+span.big-next span.center {
+	position: absolute;
+	top: 0px;
+	left: 12px;
+	height: 81px;
+	background: url('../images/ui/mobile/big-next-center.png');
+	display: inline-block;
+}
+
+span.big-next span.center.hover {
+	opacity: 0;
+	background: url('../images/ui/mobile/big-next-center-hover.png');
+	z-index: 1;
+}
+
+span.big-next span.right {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 14px;
+	height: 81px;
+	background: url('../images/ui/mobile/big-next-right.png') no-repeat;
+	display: inline-block;
+}
+
+span.big-next span.right.hover {
+	opacity: 0;
+	background: url('../images/ui/mobile/big-next-right-hover.png') no-repeat;
+	z-index: 1;
+}
+
+.show-all-previous,
+.show-all-next {
+	position: absolute;
+	bottom: 0px;
+	width: 300px;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+}
+
+span.show-all-previous span.arrow,
+span.show-all-next span.arrow {
+	position: relative;
+	display: block;
+	margin: 4px auto;
+	height: 37px;
+	width: 37px;
+	background: url('../images/ui/mobile/icon-prev.png') no-repeat;
+	z-index: 2;
+}
+
+span.show-all-next span.arrow {
+	margin-top: 40px;
+}
+
+span.show-all-previous span.arrow {
+	transform:rotate(90deg); 
+	-webkit-transform:rotate(90deg); 
+	-moz-transform:rotate(90deg); 
+	-o-transform:rotate(90deg);
+	-ms-transform:rotate(90deg);
+}
+
+span.show-all-next span.arrow {
+	transform:rotate(-90deg); 
+	-webkit-transform:rotate(-90deg); 
+	-moz-transform:rotate(-90deg); 
+	-o-transform:rotate(-90deg);
+	-ms-transform:rotate(-90deg);
+}
+
+
+
