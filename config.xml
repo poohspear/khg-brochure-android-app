@@ -3,17 +3,17 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.hello-world"
-        version   = "1.0.0">
+        id        = "com.infinity-project.book1"
+        version   = "2.0.0">
 
     <name>KHG - Infinity Condo Brochure</name>
 
     <description>
-        INFINITY - rises out of the busy commercial capital and captures the essence of the incredible transformation of Yangon.
+          INFINITY - rises out of the busy commercial capital and captures the essence of the incredible transformation of Yangon.
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
-        PhoneGap Team
+    <author href="http://phyozawtun.com" email="info@phyozawtun.com">
+        Phyo Zaw Tun
     </author>
 
     <!--
